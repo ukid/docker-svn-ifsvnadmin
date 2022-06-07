@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  ifsvnadmin:
+    image: 'ukid/ifsvnadmin:latest'
+    restart: unless-stopped
+    container_name: ifsvnadmin
+    volumes:
+      - './svn_data/svndata:/home/ubuntu/svndata/'
+      - './svn_data/ifsvn_cfg:/var/www/html/svnadmin/data/'
+      - './svn_data/apache2_cfg:/etc/apache2/conf/'
+    environment:
+      - SVN_LOCATION=svn
+    ports:
+      - '8080:80'
+      - '3690:3690'
+    networks:
+      - repo 
+
+networks:
+  repo:
+    name: repo-network

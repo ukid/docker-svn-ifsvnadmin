@@ -40,8 +40,9 @@ RUN echo '\n\
 >> /etc/apache2/mods-enabled/dav_svn.conf
 
 RUN chmod 777 /var/www/html/svnadmin/data
+COPY start.sh start.sh
 
 # Expose apache.
 EXPOSE 80
 
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+CMD /tmp/start.sh
